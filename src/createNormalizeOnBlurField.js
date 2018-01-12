@@ -12,53 +12,31 @@ function createNormalizeOnBlurField<P: {component: React.ElementType | Function 
     normalizeOnBlur?: Function,
   }
 
-  type Props = FieldProps & {
-    normalizeOnBlur: Function,
-    __blurHandlerComponent: React.ComponentType<FieldProps>,
-  }
-
-  class BlurHandler extends React.Component<Props> {
-    handleBlur = (event: any) => {
-      const {normalizeOnBlur, input: {onBlur}} = this.props
-      const value = event && event.target && event.target.hasOwnProperty('value')
-        ? event.target.value
-        : event
-      const newValue = normalizeOnBlur(value)
-      onBlur(newValue)
-    }
-
-    render(): ?React.Node {
-      const {
-        input,
-        normalizeOnBlur, // eslint-disable-line no-unused-vars
-        __blurHandlerComponent: Comp,
-        ...props
-      } = this.props
-
+  return class NormalizeOnBlurField extends React.Component<InputProps> {
+    BlurHandler = ({input: {onBlur, ...input}, ...props}: FieldProps): React.Node => {
+      const Comp = this.props.component
       return (
         <Comp
           {...props}
           input={{
             ...input,
-            onBlur: this.handleBlur,
+            onBlur: (event: any) => {
+              const {normalizeOnBlur} = this.props
+              const value = event && event.target && event.target.hasOwnProperty('value')
+                ? event.target.value
+                : event
+              const newValue = normalizeOnBlur ? normalizeOnBlur(value) : value
+              onBlur(newValue)
+            },
           }}
         />
       )
     }
-  }
 
-  return class NormalizeOnBlurField extends React.Component<InputProps> {
     render(): ?React.Node {
       const {component, normalizeOnBlur, ...props} = this.props
       if (normalizeOnBlur) {
-        return (
-          <Field
-            component={BlurHandler}
-            __blurHandlerComponent={component}
-            normalizeOnBlur={normalizeOnBlur}
-            {...props}
-          />
-        )
+        return <Field component={this.BlurHandler} {...props} />
       }
       return <Field component={component} {...props} />
     }

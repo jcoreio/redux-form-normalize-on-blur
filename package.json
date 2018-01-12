@@ -19,7 +19,7 @@
     "prepush": "npm test",
     "prepublish": "npm run lint && flow && npm test && npm run build",
     "open:coverage": "open coverage/lcov-report/index.html",
-    "semantic-release": "semantic-release",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -100,7 +100,7 @@
     "redux": "^3.7.2",
     "redux-form": "^7.2.0",
     "rimraf": "^2.6.0",
-    "semantic-release": "^11.0.0",
+    "semantic-release": "^11.0.2",
     "validate-commit-msg": "^2.8.2"
   },
   "peerDependencies": {
