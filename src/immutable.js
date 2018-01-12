@@ -1,6 +1,6 @@
 // @flow
 
-import {Field as _Field} from 'redux-form'
+import {Field as _Field} from 'redux-form/immutable'
 import createNormalizeOnBlurField from './createNormalizeOnBlurField'
 
 const Field = createNormalizeOnBlurField(_Field)

@@ -44,9 +44,10 @@
     "url": "https://github.com/jcoreio/redux-form-normalize-on-blur.git"
   },
   "keywords": [
-    "es2015",
     "react",
-    "skeleton"
+    "redux-form",
+    "normalize",
+    "formatted-input"
   ],
   "author": "Andy Edwards",
   "license": "MIT",
@@ -86,6 +87,7 @@
     "flow-copy-source": "^1.2.1",
     "flow-watch": "^1.1.0",
     "husky": "^0.14.3",
+    "immutable": "^3.8.2",
     "istanbul": "^0.4.5",
     "jsdom": "^11.5.1",
     "jsdom-global": "^3.0.2",
@@ -94,12 +96,16 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^3.0.0-beta.2",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-form": "^7.2.0",
     "rimraf": "^2.6.0",
     "semantic-release": "^11.0.0",
     "validate-commit-msg": "^2.8.2"
   },
   "peerDependencies": {
-    "react": "^15.0.0 || ^16.0.0"
+    "react": "^15.0.0 || ^16.0.0",
+    "redux-form": "^7.0.0"
   },
   "dependencies": {
     "prop-types": "^15.0.0"
