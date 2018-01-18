@@ -1,9 +1,10 @@
 // @flow
 
 import * as React from 'react'
+import typeof {Field} from 'redux-form'
 import type {FieldProps} from 'redux-form'
 
-function createNormalizeOnBlurField<P: {component: React.ElementType | Function | string}>(
+function createNormalizeOnBlurField<P: React.ElementProps<Field>>(
   Field: React.ComponentType<P>
 ): React.ComponentType<P & {normalizeOnBlur?: Function}> {
   type FieldInputProps = React.ElementProps<typeof Field>
