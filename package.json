@@ -42,7 +42,7 @@
     ]
   },
   "config": {
-    "mocha": "-r @babel/register -r jsdom-global/register ./test/configure.js ./test/**.js",
+    "mocha": "-r @babel/register -r jsdom-global/register ./test/configure.js ./test/*.js ./test/**/*.js",
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
