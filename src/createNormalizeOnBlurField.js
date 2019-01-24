@@ -15,16 +15,33 @@ function createNormalizeOnBlurField<P: React.ElementProps<Field>>(
   }
 
   return class NormalizeOnBlurField extends React.Component<InputProps> {
+    _input: ?Element = null
+
     BlurHandler = memoize(
       Comp => ({
         input: { onBlur, ...input },
         ...props
       }: FieldProps): React.Node => {
+        const enterListener = (event: SyntheticKeyboardEvent<any>) => {
+          if (event.keyCode === 13) {
+            const { normalizeOnBlur } = this.props
+            const value =
+              event && event.target && event.target.hasOwnProperty('value')
+                ? (event.target: any).value
+                : event
+            const newValue = normalizeOnBlur ? normalizeOnBlur(value) : value
+            input.onChange(newValue)
+          }
+        }
         return (
           <Comp
             {...props}
             input={{
               ...input,
+              onKeyDown: (event: SyntheticKeyboardEvent<any>) => {
+                enterListener(event)
+                if ((input: any).onKeyDown) (input: any).onKeyDown(event)
+              },
               onBlur: (event: any) => {
                 const { normalizeOnBlur } = this.props
                 const value =
