@@ -3,8 +3,6 @@
   "version": "0.0.0-development",
   "description": "a Field component that supports a normalizeOnBlur property",
   "main": "index.js",
-  "module": "es/index.js",
-  "modules.root": "es",
   "sideEffects": false,
   "scripts": {
     "lint": "eslint src test --cache",
