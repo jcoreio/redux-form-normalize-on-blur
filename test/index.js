@@ -15,7 +15,7 @@ import {
 import { Field as PojoField } from '../src'
 import { Field as ImmutableField } from '../src/immutable'
 
-const Input = ({ input: props }): React.Node => <input {...props} />
+const Input: Function = ({ input: props }): React.Node => <input {...props} />
 
 describe('NormalizeOnBlurField', () => {
   for (let immutable of [false, true]) {

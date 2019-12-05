@@ -1,15 +1,13 @@
 // @flow
 
 import * as React from 'react'
-import typeof { Field } from 'redux-form'
 import type { FieldProps } from 'redux-form'
+import type { Props as FieldInputProps } from 'redux-form/lib/FieldProps.types'
 import memoize from './util/memoize'
 
-function createNormalizeOnBlurField<P: React.ElementProps<Field>>(
+function createNormalizeOnBlurField<P: FieldInputProps>(
   Field: React.ComponentType<P>
 ): React.ComponentType<P & { normalizeOnBlur?: Function }> {
-  type FieldInputProps = React.ElementProps<typeof Field>
-
   type InputProps = FieldInputProps & {
     normalizeOnBlur?: Function,
   }
@@ -62,9 +60,11 @@ function createNormalizeOnBlurField<P: React.ElementProps<Field>>(
     render(): React.Node {
       const { component, normalizeOnBlur, ...props } = this.props
       if (normalizeOnBlur) {
-        return <Field component={this.BlurHandler(component)} {...props} />
+        return (
+          <Field {...(props: any)} component={this.BlurHandler(component)} />
+        )
       }
-      return <Field component={component} {...props} />
+      return <Field {...(props: any)} component={component} />
     }
   }
 }
