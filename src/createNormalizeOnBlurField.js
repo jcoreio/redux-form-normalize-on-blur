@@ -5,9 +5,9 @@ import type { FieldProps } from 'redux-form'
 import type { Props as FieldInputProps } from 'redux-form/lib/FieldProps.types'
 import memoize from './util/memoize'
 
-function createNormalizeOnBlurField<P: FieldInputProps>(
-  Field: React.ComponentType<P>
-): React.ComponentType<P & { normalizeOnBlur?: Function }> {
+function createNormalizeOnBlurField(
+  Field: React.ComponentType<FieldInputProps>
+): React.ComponentType<FieldInputProps & { normalizeOnBlur?: Function }> {
   type InputProps = FieldInputProps & {
     normalizeOnBlur?: Function,
   }
