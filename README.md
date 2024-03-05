@@ -15,20 +15,23 @@ npm install --save redux-form-normalize-on-blur
 ```
 
 ```js
-const {Field} = require('redux-form-normalize-on-blur')
+const { Field } = require('redux-form-normalize-on-blur')
 ```
+
 or
+
 ```js
-const {Field} = require('redux-form-normalize-on-blur/immutable')
+const { Field } = require('redux-form-normalize-on-blur/immutable')
 ```
 
 ## Example
 
 The following field will trim its text when it loses focus:
+
 ```js
 <Field
   name="name"
-  normalizeOnBlur={value => value && value.trim()}
+  normalizeOnBlur={(value) => value && value.trim()}
   component={YourInputComponent}
 />
 ```
