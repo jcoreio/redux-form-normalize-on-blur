@@ -2,18 +2,17 @@ import * as React from 'react'
 import type { BaseFieldProps, WrappedFieldProps } from 'redux-form'
 import memoize from './util/memoize'
 
-type AdditionalProps = { input: { onKeyDown: React.KeyboardEventHandler<any> } }
+type AdditionalProps = {
+  input: { onKeyDown?: React.KeyboardEventHandler<any> }
+}
+
+type InputProps = BaseFieldProps<AdditionalProps> & {
+  normalizeOnBlur?: any
+}
 
 export default function createNormalizeOnBlurField(
   Field: React.ComponentType<BaseFieldProps<AdditionalProps>>
-): React.ComponentType<
-  BaseFieldProps<AdditionalProps> & {
-    normalizeOnBlur?: any
-  }
-> {
-  type InputProps = BaseFieldProps<AdditionalProps> & {
-    normalizeOnBlur?: any
-  }
+): React.ComponentType<InputProps> {
   return class NormalizeOnBlurField extends React.Component<InputProps> {
     _input: Element | null | undefined = null
     BlurHandler = memoize(
@@ -24,7 +23,7 @@ export default function createNormalizeOnBlurField(
           ...props
         }: WrappedFieldProps): React.ReactElement => {
           const enterListener = (event: React.KeyboardEvent<any>) => {
-            if (event.keyCode === 13) {
+            if (event.key === 'Enter') {
               const { normalizeOnBlur } = this.props
               const value =
                 event &&
