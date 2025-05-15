@@ -8,7 +8,6 @@ import {
   reduxForm as pojoReduxForm,
   reducer as pojoReducer,
   WrappedFieldProps,
-  DecoratedFormProps,
 } from 'redux-form'
 import {
   reduxForm as immutableReduxForm,
@@ -85,20 +84,18 @@ describe('NormalizeOnBlurField', () => {
       it(`normalizes when enter is pressed`, function () {
         const store = createStore(combineReducers({ form: reducer }))
 
-        const Form = reduxForm({ form: 'form' })(
-          ({ onSubmit }: DecoratedFormProps<any, any>) => (
-            <form>
-              <Field
-                name="hello"
-                component={Input}
-                normalizeOnBlur={(value: string | null | undefined) =>
-                  value && value.trim()
-                }
-              />
-              <button type="submit">Submit</button>
-            </form>
-          )
-        )
+        const Form = reduxForm({ form: 'form' })(() => (
+          <form>
+            <Field
+              name="hello"
+              component={Input}
+              normalizeOnBlur={(value: string | null | undefined) =>
+                value && value.trim()
+              }
+            />
+            <button type="submit">Submit</button>
+          </form>
+        ))
 
         const comp = render(
           <Provider store={store}>
