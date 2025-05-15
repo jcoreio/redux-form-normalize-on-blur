@@ -6,14 +6,19 @@ type AdditionalProps = {
   input: { onKeyDown?: React.KeyboardEventHandler<any> }
 }
 
-type InputProps = BaseFieldProps<AdditionalProps> & {
+// eslint-disable-next-line @typescript-eslint/ban-types
+type BaseNormalizeOnBlurFieldProps<P = {}> = BaseFieldProps<
+  P & AdditionalProps
+> & {
   normalizeOnBlur?: any
 }
 
 export default function createNormalizeOnBlurField(
   Field: React.ComponentType<BaseFieldProps<AdditionalProps>>
-): React.ComponentType<InputProps> {
-  return class NormalizeOnBlurField extends React.Component<InputProps> {
+) {
+  return class NormalizeOnBlurField<
+    P extends BaseNormalizeOnBlurFieldProps = BaseNormalizeOnBlurFieldProps
+  > extends React.Component<P> {
     _input: Element | null | undefined = null
     BlurHandler = memoize(
       (Comp: React.ComponentType<WrappedFieldProps & AdditionalProps>) =>

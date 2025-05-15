@@ -19,7 +19,9 @@ import { Field as ImmutableField } from '../src/immutable'
 
 const Input: any = ({
   input: props,
-}: WrappedFieldProps): React.ReactElement => <input {...props} />
+}: WrappedFieldProps & {
+  input: { onKeyDown?: React.KeyboardEventHandler }
+}): React.ReactElement => <input {...props} />
 
 describe('NormalizeOnBlurField', () => {
   for (const immutable of [false, true] as boolean[]) {
